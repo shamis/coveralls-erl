@@ -201,13 +201,14 @@ convert_module(Mod, S) ->
           Str          =
             "{~n"
             "\"name\": \"~s\",~n"
-            "\"source\": \"~s\",~n"
+            %"\"source\": \"~s\",~n"
             "\"source_digest\": \"~s\",~n"
             "\"coverage\": ~p~n"
             "}",
           Src = escape_str(Src0),
           lists:flatten(
-            io_lib:format(Str, [relative_to_cwd(SrcFile), Src, SrcDigest, Cov]))
+            io_lib:format(Str, [relative_to_cwd(SrcFile), SrcDigest, Cov]))
+	    %io_lib:format(Str, [relative_to_cwd(SrcFile), Src, SrcDigest, Cov]))
   end.
 
 expand(Path) -> expand(filename:split(Path), []).
