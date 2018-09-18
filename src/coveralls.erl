@@ -195,12 +195,14 @@ convert_module(Mod, S) ->
     SrcFile ->
           {ok, SrcBin} = read_file(S, SrcFile),
           Src0         = lists:flatten(io_lib:format("~s", [SrcBin])),
+          SrcDigest    = erlang:md5(SrcBin),
           LinesCount   = count_lines(Src0),
           Cov          = create_cov(CoveredLines, LinesCount),
           Str          =
             "{~n"
             "\"name\": \"~s\",~n"
             "\"source\": \"~s\",~n"
+            "\"source_digest\": \"~s\",~n"
             "\"coverage\": ~p~n"
             "}",
           Src = escape_str(Src0),
