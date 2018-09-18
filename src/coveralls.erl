@@ -116,7 +116,9 @@ convert_file([[_|_]|_]=Filenames, ServiceJobId, ServiceName, RepoToken0, S) ->
     io_lib:format(Str, [ServiceJobId, ServiceName, ConvertedModules])).
 
 convert_and_send_file(Filenames, ServiceJobId, ServiceName, RepoToken, S) ->
-  send(convert_file(Filenames, ServiceJobId, ServiceName, RepoToken, S), S).
+  Json = convert_file(Filenames, ServiceJobId, ServiceName, RepoToken, S),
+  io:format("JSON to be send : ~p~n"),
+  send(Json, S).
 
 send(Json, #s{poster=Poster, poster_init=Init}) ->
   ok       = Init(),
