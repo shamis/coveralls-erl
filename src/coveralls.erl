@@ -207,7 +207,7 @@ convert_module(Mod, S) ->
             "}",
           Src = escape_str(Src0),
           lists:flatten(
-            io_lib:format(Str, [relative_to_cwd(SrcFile), Src, Cov]))
+            io_lib:format(Str, [relative_to_cwd(SrcFile), Src, SrcDigest, Cov]))
   end.
 
 expand(Path) -> expand(filename:split(Path), []).
